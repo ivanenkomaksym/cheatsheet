@@ -15,6 +15,16 @@ Run NATS
 docker run -d --name nats-streaming -p 4222:4222 nats-streaming:latest
 ```
 
+Run RabbitMQ
+```
+docker run -d --hostname rabbitmq --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.13.0-management
+```
+
+Run Jaeger
+```
+docker run -d -p 4317:4317 -p 16686:16686 jaegertracing/all-in-one:latest
+```
+
 Build docker images with override and run containers
 ```
 docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
