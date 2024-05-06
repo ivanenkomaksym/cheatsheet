@@ -8,6 +8,11 @@ docker run -d --name mysql-container -e MYSQL_ROOT_PASSWORD=my-secret-pw -e MYSQ
 Run Mongo
 ```
 docker run -d -p 27017:27017 --name mongo mongo:latest
+````
+
+Run Redis
+```
+docker run -d --name redis-stack -p 6379:6379 -p 8001:8001 redis/redis-stack:latest
 ```
 
 Run NATS
@@ -37,7 +42,7 @@ docker-compose up -d --no-deps --build servicename
 
 docker compose build single container
 ```
-docker-compose build customerapi
+docker-compose build customerapi1
 ```
 
 check docker image content
