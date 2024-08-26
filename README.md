@@ -2,7 +2,7 @@
 
 Run MySQL container
 ```
-docker run -d --name mysql-container -e MYSQL_ROOT_PASSWORD=my-secret-pw -e MYSQL_DATABASE=TweetsDb -e MYSQL_USER=myuser -e MYSQL_PASSWORD=mypassword -p 3306:3306 mysql:latest
+docker run -d --name mysql-container -e MYSQL_ROOT_PASSWORD=my-secret-pw -e MYSQL_DATABASE=AspNetAzureSample -e MYSQL_USER=myuser -e MYSQL_PASSWORD=mypassword -p 3306:3306 mysql:latest
 ```
 
 Run Mongo
@@ -58,4 +58,111 @@ docker exec -u 0 -it a87eb386f3a5 bash
 docker rebuild without cache
 ```
 docker build --no-cache -t [name] .
+```
+
+# Kubernetes cheatsheet
+
+List all k8s pods
+```
+kubectl get pods
+```
+
+List all k8s services
+```
+kubectl get services
+```
+
+View deployments
+```
+kubectl get deployments
+```
+
+Restart pod
+```
+kubectl rollout restart deployment [name]
+```
+
+Show pod lods
+```
+kubectl logs [pod]
+```
+
+Get pod details
+```
+kubectl describe pod [name]
+```
+
+Make deployment to update image
+```
+kubectl rollout restart deployment orderapi-pod
+```
+
+Get inside the container which is contained inside the pod and start a shell
+```
+kubectl exec -it [pod] -c [container] -- /bin/bash
+```
+
+Install and use curl
+```
+apt-get update
+apt-get install curl
+curl http://customerapi/api/Customer
+curl http://localhost/gateway/discounts
+```
+
+Install curl on Alpine Linux
+```
+apk update && apk add --no-cache curl
+```
+
+Install curl on Debian
+```
+apt-get -y update; apt-get -y install curl
+```
+
+Install telnet and dnsutils
+```
+apt install telnet
+apt install dnsutils
+```
+
+In case hostname isn't resolved by the microservice (https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution/)
+1. Create dnsutils pod
+```
+kubectl apply -f https://k8s.io/examples/admin/dns/dnsutils.yaml
+```
+2. Verify its status
+```
+kubectl get pods dnsutils
+```
+3. Try to look up the hostname
+```
+kubectl exec -i -t dnsutils -- nslookup helmapp-rabbitmq
+```
+
+```
+Server:		10.96.0.10
+Address:	10.96.0.10#53
+
+Name:	myapp-rabbitmq.default.svc.cluster.local
+Address: 10.107.88.226
+```
+
+Open minikube WEB dashboard
+```
+minikube dashboard
+```
+
+Enable metrics
+```
+minikube addons enable metrics-server
+```
+
+Expose service
+```
+minikube service webui --url
+```
+
+```
+http://192.168.99.100:31167
 ```
