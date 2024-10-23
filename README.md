@@ -30,6 +30,21 @@ Run Jaeger
 docker run -d -p 4317:4317 -p 16686:16686 jaegertracing/all-in-one:latest
 ```
 
+Rebuild the images without starting the containers
+```
+docker-compose build
+```
+
+Run docker images defined in `compose.yaml`
+```
+docker-compose up
+```
+
+To ensure that new Docker images are built from your project when running docker-compose up
+```
+docker-compose up --build
+```
+
 Build docker images with override and run containers
 ```
 docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
@@ -95,6 +110,11 @@ kubectl describe pod [name]
 Make deployment to update image
 ```
 kubectl rollout restart deployment orderapi-pod
+```
+
+Update deployment configuration in runtime
+```
+kubectl edit deploy [name]
 ```
 
 Get inside the container which is contained inside the pod and start a shell
