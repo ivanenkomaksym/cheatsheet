@@ -75,6 +75,43 @@ docker rebuild without cache
 docker build --no-cache -t [name] .
 ```
 
+# Podman cheatsheet
+
+Build podman image in dir with Dockerfile
+```
+podman build .
+```
+
+Run podman container with image
+```
+podman run -it busybox
+```
+
+Create and start containers based on compose.yaml. Build images before starting containers. Detached mode
+```
+podman compose up --build --detach
+```
+
+Remove all unused images from the local store
+```
+podman image prune
+```
+
+Pull the image from Docker Hub
+```
+podman pull ivanenkomak/whois-api
+```
+
+Push the image to Docker Hub
+```
+podman push <IMAGE_ID> docker://docker.io/<username>/<imagename>
+```
+For example
+```
+podman login docker.io
+podman push 41192a8cb198 docker.io/ivanenkomak/whois-api
+```
+
 # Kubernetes cheatsheet
 
 List all k8s pods
